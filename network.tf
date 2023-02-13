@@ -82,9 +82,10 @@ resource "aws_route_table" "private_route_table" {
   vpc_id = aws_vpc.aws_vpc.id
 
   tags = {
-    Name =  var.private_route_table_name
+    Name = var.private_route_table_name
   }
 }
+
 //---------------------------------------------------------------
 //Route Table association for private subnets
 resource "aws_route_table_association" "private_subnet_private_route_table" {
