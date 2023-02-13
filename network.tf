@@ -85,7 +85,8 @@ resource "aws_route_table" "private_route_table" {
     Name =  var.private_route_table_name
   }
 }
-
+//---------------------------------------------------------------
+//Route Table association for private subnets
 resource "aws_route_table_association" "private_subnet_private_route_table" {
   depends_on     = [aws_subnet.private_subnet, aws_route_table.private_route_table]
   route_table_id = aws_route_table.private_route_table.id
