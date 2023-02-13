@@ -75,7 +75,7 @@ variable "public_route_table_name" {
 //---------------------------------------------------------------
 //Variables for private route table
 variable "private_route_table_name" {
-  type = string
+  type        = string
   description = "Name of Private Route Table"
 }
 
