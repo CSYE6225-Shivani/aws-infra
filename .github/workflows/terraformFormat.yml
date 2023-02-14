@@ -1,0 +1,26 @@
+name: 'Terraform Format Check'
+
+on:
+  push:
+    branches:
+      - Assignment3
+
+    jobs:
+      terraformFormatCheck:
+        name: 'Terraform Format Check'
+        runs-on: ubuntu-latest
+
+        steps:
+          - name: Checkout
+            uses: actions/checkout@v3
+
+          - name: Setup Terraform
+            uses: hashicorp/setup-terraform@v2
+
+          - name: Terraform Format
+            id: fmt
+            run: terraform fmt -check
+            continue-on-error: false
+
+          - name: Confirm End
+            run: echo "End"
