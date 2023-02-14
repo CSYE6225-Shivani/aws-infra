@@ -2,12 +2,11 @@ name: 'Terraform Format Check'
 
 on:
   push:
-    branches:
-      - Assignment3
+    branches: [ Assignment3 ]
 
+  workflow_dispatch:
     jobs:
       terraformFormatCheck:
-        name: 'Terraform Format Check'
         runs-on: ubuntu-latest
 
         steps:
