@@ -1,8 +1,8 @@
 name: 'Terraform Format Check'
 
 on:
-  push:
-    branches: [ Assignment3 ]
+  pull_request:
+    branches: [ main ]
 
   workflow_dispatch:
 
