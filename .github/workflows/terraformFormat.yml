@@ -5,21 +5,27 @@ on:
     branches: [ Assignment3 ]
 
   workflow_dispatch:
-    jobs:
-      terraformFormatCheck:
-        runs-on: ubuntu-latest
 
-        steps:
-          - name: Checkout
-            uses: actions/checkout@v3
+jobs:
+  terraformFormatCheck:
+    runs-on: ubuntu-latest
 
-          - name: Setup Terraform
-            uses: hashicorp/setup-terraform@v2
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
 
-          - name: Terraform Format
-            id: fmt
-            run: terraform fmt -check
-            continue-on-error: false
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
 
-          - name: Confirm End
-            run: echo "End"
+      - name: Terraform Format
+        id: fmt
+        run: terraform fmt -check
+        continue-on-error: false
+
+      - name: Confirm End
+        run: echo "End"
+
+      - name: Confirm End
+        run: echo "End"
+
+
