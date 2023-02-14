@@ -23,6 +23,10 @@ jobs:
           echo $
         continue-on-error: false
 
+      - name: Terraform Validate
+        run: terraform validate -json
+        continue-on-error: false
+
       - name: Confirm End
         run: echo "End"
 
