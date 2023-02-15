@@ -30,24 +30,20 @@ variable "ig_name" {
 
 //---------------------------------------------------------------
 //Variables for Subnets
-variable "public_subnet_cidr_block" {
-  type        = map(string)
-  description = "CIDR block for public subnets"
-  #  default = {
-  #    "us-east-1a" = "10.0.0.0/19",
-  #    "us-east-1b" = "10.0.64.0/18",
-  #    "us-east-1c" = "10.0.192.0/19"
-  #  }
+
+variable "count_subnets" {
+  type        = number
+  description = "Count of subnets to be created"
 }
 
-variable "private_subnet_cidr_block" {
-  type        = map(string)
-  description = "CIDR block for private subnets"
-  #  default = {
-  #    "us-east-1a" = "10.0.32.0/19",
-  #    "us-east-1b" = "10.0.128.0/18",
-  #    "us-east-1c" = "10.0.224.0/19"
-  #  }
+variable "subnet_mask" {
+  type        = number
+  description = "subnet_mask for subnet CIDR blocks"
+}
+
+variable "cidr_offset_for_private_subnet" {
+  type        = number
+  description = "offset to calculate the subnet mask for private subnets passed in cidrsubnet function"
 }
 
 variable "map_public_ip_on_launch" {
@@ -78,7 +74,6 @@ variable "private_route_table_name" {
   type        = string
   description = "Name of Private Route Table"
 }
-
 
 
 
