@@ -75,5 +75,41 @@ variable "private_route_table_name" {
   description = "Name of Private Route Table"
 }
 
+//---------------------------------------------------------------
+//Variables for security group
+variable "security_group_name" {
+  type = string
+  description = "Name of security group"
+}
 
+variable "application_port" {
+  type = number
+  description = "Port on which application runs"
+}
 
+//---------------------------------------------------------------
+//Variables for EC2 instance
+variable "custom_ami_id" {
+  type = string
+  description = "ID of custom AMI created"
+}
+
+variable "instance_type" {
+  type = string
+  description = "Instance Type"
+}
+
+variable "delete_on_termination" {
+  type = bool
+  description = "Flag for protect against accidental termination"
+}
+
+variable "public_key" {
+  type = string
+  description = "Public key for EC2 access"
+}
+
+variable "ec2_name" {
+  type = string
+  description = "EC2 Instance name"
+}
