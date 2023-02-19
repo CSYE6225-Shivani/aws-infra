@@ -101,8 +101,58 @@ resource "aws_route_table_association" "private_subnet_private_route_table" {
   subnet_id      = element(aws_subnet.private_subnets[*].id, count.index)
 }
 
+//---------------------------------------------------------------
+//Application Security Group
 
+resource "aws_security_group" "application-sg" {
+  depends_on = [aws_vpc.aws_vpc]
+  name = "application"
+  description = "Setting ingress & egress rules"
+  vpc_id = aws_vpc.aws_vpc.id
 
+  ingress {
+    description = "SSH"
+    from_port = 22
+    protocol  = "tcp"
+    to_port   = 22
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    description = "HTTP"
+    from_port = 80
+    protocol  = "tcp"
+    to_port   = 80
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    description = "HTTPS"
+    from_port = 443
+    protocol  = "tcp"
+    to_port   = 443
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    description = "application_port"
+    from_port = var.application_port
+    protocol  = "tcp"
+    to_port   = var.application_port
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = var.security_group_name
+  }
+}
 
 
 
