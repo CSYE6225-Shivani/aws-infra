@@ -1,7 +1,6 @@
-//---------------------------------------------------------------
-//EC2
+//EC2 instance
 resource "aws_key_pair" "ec2_access" {
-  key_name = "ec2"
+  key_name   = "ec2"
   public_key = var.public_key
 }
 
@@ -16,20 +15,21 @@ data "aws_subnet_ids" "subnetIDs" {
 }
 
 output "subnet_ids" {
-  value = [element(tolist(data.aws_subnet_ids.subnetIDs.ids), 0),element(tolist(data.aws_subnet_ids.subnetIDs.ids), 1),element(tolist(data.aws_subnet_ids.subnetIDs.ids), 2)]
+  value = [element(tolist(data.aws_subnet_ids.subnetIDs.ids), 0), element(tolist(data.aws_subnet_ids.subnetIDs.ids), 1), element(tolist(data.aws_subnet_ids.subnetIDs.ids), 2)]
 }
 
 resource "aws_instance" "application-ec2" {
-  depends_on = [aws_vpc.aws_vpc,aws_security_group.application-sg]
-  ami = var.custom_ami_id
-  instance_type = var.instance_type
+  depends_on             = [aws_vpc.aws_vpc, aws_security_group.application-sg]
+  ami                    = var.custom_ami_id
+  instance_type          = var.instance_type
   vpc_security_group_ids = [aws_security_group.application-sg.id]
-  key_name = aws_key_pair.ec2_access.key_name
-  subnet_id = element(tolist(data.aws_subnet_ids.subnetIDs.ids), 0)
+  key_name               = aws_key_pair.ec2_access.key_name
+  subnet_id              = element(tolist(data.aws_subnet_ids.subnetIDs.ids), 0)
+  disable_api_termination = var.disable_api_termination
 
   root_block_device {
-    volume_size = 50
-    volume_type = "gp2"
+    volume_size           = 50
+    volume_type           = "gp2"
     delete_on_termination = var.delete_on_termination
   }
 
