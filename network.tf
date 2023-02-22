@@ -139,7 +139,6 @@ resource "aws_security_group" "application-sg" {
     protocol    = "tcp"
     to_port     = var.application_port
     cidr_blocks = ["0.0.0.0/0"]
-    rule_
   }
 
   tags = {
