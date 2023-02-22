@@ -30,7 +30,6 @@ variable "ig_name" {
 
 //---------------------------------------------------------------
 //Variables for Subnets
-
 variable "count_subnets" {
   type        = number
   description = "Count of subnets to be created"
@@ -78,38 +77,43 @@ variable "private_route_table_name" {
 //---------------------------------------------------------------
 //Variables for security group
 variable "security_group_name" {
-  type = string
+  type        = string
   description = "Name of security group"
 }
 
 variable "application_port" {
-  type = number
+  type        = number
   description = "Port on which application runs"
 }
 
 //---------------------------------------------------------------
 //Variables for EC2 instance
 variable "custom_ami_id" {
-  type = string
+  type        = string
   description = "ID of custom AMI created"
 }
 
 variable "instance_type" {
-  type = string
+  type        = string
   description = "Instance Type"
 }
 
 variable "delete_on_termination" {
-  type = bool
+  type        = bool
   description = "Flag for protect against accidental termination"
 }
 
 variable "public_key" {
-  type = string
+  type        = string
   description = "Public key for EC2 access"
 }
 
 variable "ec2_name" {
-  type = string
+  type        = string
   description = "EC2 Instance name"
+}
+
+variable "disable_api_termination" {
+  type = bool
+  description = "Protect against accidental termination"
 }
