@@ -114,6 +114,6 @@ variable "ec2_name" {
 }
 
 variable "disable_api_termination" {
-  type = bool
+  type        = bool
   description = "Protect against accidental termination"
 }
