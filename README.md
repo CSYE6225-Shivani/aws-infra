@@ -1,5 +1,6 @@
 # aws-infra
-
+---------------------------
+# _Assignment 3_
 ## Configure AWS CLI:
 Install and configure AWS CLI from the following link:
 https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html
@@ -22,3 +23,25 @@ https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli
 4. Run `terraform apply -var-file="tfvar file name with extension"`
 5. Run `terraform destroy` to destroy the resources
 
+---------
+# _**Assignment 4**_
+1. With the generated AMI ID, edit terraform.tfvars.demo and change the AMI ID
+
+
+2. Run below command to launch EC2 instance on generated AMI
+
+   `terraform apply -var-file="terraform.tfvars.demo"`
+
+
+3. Test all API endpoints are working using the public IP of EC2 instance
+
+
+4. Reboot the EC2 instance 
+
+
+5. Test all API endpoints
+
+
+6. Run below command to destroy resources
+
+   `terraform destroy -var-file="terraform.tfvars.demo"`
