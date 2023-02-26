@@ -106,7 +106,7 @@ resource "aws_route_table_association" "private_subnet_private_route_table" {
 resource "aws_security_group" "application-sg" {
   depends_on  = [aws_vpc.aws_vpc]
   name        = "application"
-  description = "Setting ingress & egress rules"
+  description = "Security group for EC2 instances"
   vpc_id      = aws_vpc.aws_vpc.id
 
   ingress {
@@ -149,9 +149,33 @@ resource "aws_security_group" "application-sg" {
   }
 
   tags = {
-    Name = var.security_group_name
+    Name = var.app_security_group_name
   }
 }
+
+//---------------------------------------------------------------
+//Database Security Group
+resource "aws_security_group" "database_security_group" {
+  depends_on  = [aws_vpc.aws_vpc]
+  name        = "database"
+  description = "Security group for database"
+  vpc_id      = aws_vpc.aws_vpc.id
+
+  ingress {
+    description     = "PostgreSQL"
+    from_port       = 5432
+    protocol        = "tcp"
+    to_port         = 5432
+    security_groups = [aws_security_group.application-sg]
+    cidr_blocks     = [aws_vpc.aws_vpc]
+  }
+
+  tags = {
+    Name = var.db_security_group_name
+  }
+}
+
+
 
 
 

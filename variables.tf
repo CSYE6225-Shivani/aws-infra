@@ -76,7 +76,7 @@ variable "private_route_table_name" {
 
 //---------------------------------------------------------------
 //Variables for security group
-variable "security_group_name" {
+variable "app_security_group_name" {
   type        = string
   description = "Name of security group"
 }
@@ -116,4 +116,68 @@ variable "ec2_name" {
 variable "disable_api_termination" {
   type        = bool
   description = "Protect against accidental termination"
+}
+
+//----------------------------------------------------------------
+//Variables for Database Security Group
+variable "db_security_group_name" {
+  type        = string
+  description = "DB security group name"
+}
+
+//Variables for RDS Parameter Group
+variable "db_family" {
+  type        = string
+  description = "Database family"
+}
+
+//Variables for DB Instance
+variable "db_instance" {
+  type        = string
+  description = "DB Instance Class"
+}
+
+variable "db_engine" {
+  type        = string
+  description = "DB engine"
+}
+
+variable "db_engine_version" {
+  type        = number
+  description = "DB engine version"
+}
+
+variable "db_mutli_az" {
+  type        = bool
+  description = "Multi-AZ deployment"
+}
+
+variable "db_identifier" {
+  type        = string
+  description = "DB Instance Identifier"
+}
+
+variable "db_master_username" {
+  type        = string
+  description = "Master username"
+}
+
+variable "db_master_password" {
+  type        = string
+  description = "Chavan@123"
+}
+
+variable "db_public_access" {
+  type        = bool
+  description = "Public Accessibility"
+}
+
+variable "db_name" {
+  type        = string
+  description = "db_name"
+}
+
+variable "db_AZ" {
+  type        = string
+  description = "DB Availability Zone"
 }
