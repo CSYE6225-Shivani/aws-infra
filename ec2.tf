@@ -16,18 +16,16 @@ data "aws_subnet_ids" "subnetIDs" {
     name   = "tag:Name"
     values = ["*Public*"]
   }
-
-  tags = {
-    "Name" = "Obtaining public Subnet IDs for EC2"
-  }
 }
 
 output "subnet_ids" {
-  value = [element(tolist(data.aws_subnet_ids.subnetIDs.ids), 0), element(tolist(data.aws_subnet_ids.subnetIDs.ids), 1), element(tolist(data.aws_subnet_ids.subnetIDs.ids), 2)]
+  value = [element(tolist(data.aws_subnet_ids.subnetIDs.ids), 0),
+    element(tolist(data.aws_subnet_ids.subnetIDs.ids), 1),
+    element(tolist(data.aws_subnet_ids.subnetIDs.ids), 2)]
 }
 
 resource "aws_instance" "application-ec2" {
-  depends_on              = [aws_key_pair.ec2_access, aws_vpc.aws_vpc, aws_security_group.application-sg]
+  depends_on              = [aws_key_pair.ec2_access, aws_vpc.aws_vpc, aws_security_group.application-sg,aws_db_instance.postgres_database]
   ami                     = var.custom_ami_id
   instance_type           = var.instance_type
   vpc_security_group_ids  = [aws_security_group.application-sg.id]
@@ -48,7 +46,7 @@ cd /etc/profile.d
 touch parameters.sh
 echo export HOST_NAME=${aws_db_instance.postgres_database.address} >> parameters.sh
 echo export DB_PORT=${var.db_port} >> parameters.sh
-echo export API_PORT=${var.api_port} >> parameters.sh
+echo export API_PORT=${var.application_port} >> parameters.sh
 echo export DB_NAME=${var.db_name} >> parameters.sh
 echo export DB_USERNAME=${var.db_master_username} >> parameters.sh
 echo export DB_PASSWORD=${var.db_master_password} >> parameters.sh
@@ -57,10 +55,14 @@ cd /etc/systemd/system
 touch service.env
 echo HOST_NAME=${aws_db_instance.postgres_database.address} >> service.env
 echo DB_PORT=${var.db_port} >> service.env
-echo API_PORT=${var.api_port} >> service.env
+echo API_PORT=${var.application_port} >> service.env
 echo DB_NAME=${var.db_name} >> service.env
 echo DB_USERNAME=${var.db_master_username} >> service.env
 echo DB_PASSWORD=${var.db_master_password} >> service.env
+
+systemctl daemon-reload
+systemctl enable userWebApp.service
+systemctl start userWebApp.service
 
 EOF
 

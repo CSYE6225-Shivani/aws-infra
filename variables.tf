@@ -211,8 +211,3 @@ variable "ec2_iam_role" {
   type        = string
   description = "Name of EC2 IAM role"
 }
-
-variable "api_port" {
-  type        = number
-  description = "Application Port"
-}
