@@ -1,4 +1,4 @@
-data "aws_subnet_ids" "public_subnet_ids" {
+data "aws_subnet_ids" "private_subnet_ids" {
   depends_on = [aws_vpc.aws_vpc, aws_subnet.private_subnets]
   vpc_id     = aws_vpc.aws_vpc.id
 
@@ -6,13 +6,10 @@ data "aws_subnet_ids" "public_subnet_ids" {
     name   = "tag:Name"
     values = ["*Private*"]
   }
-
-  tags = {
-    "Name" = "Private Subnet ID list for RDS"
-  }
 }
 
 resource "aws_db_subnet_group" "private_subnet_list" {
+  depends_on = [aws_vpc.aws_vpc,aws_subnet.private_subnets]
   name = "private-subnet-list"
   subnet_ids = [element(tolist(data.aws_subnet_ids.private_subnet_ids.ids), 0),
     element(tolist(data.aws_subnet_ids.private_subnet_ids.ids), 1),
@@ -35,6 +32,8 @@ resource "aws_db_parameter_group" "rds_parameter_group" {
 }
 
 resource "aws_db_instance" "postgres_database" {
+  depends_on = [aws_db_subnet_group.private_subnet_list, aws_security_group.database_security_group,aws_db_parameter_group.rds_parameter_group]
+
   instance_class         = var.db_instance
   port                   = var.db_port
   engine                 = var.db_engine
