@@ -3,8 +3,12 @@ resource "random_id" "s3_bucket_id" {
 }
 
 resource "aws_s3_bucket" "s3_bucket" {
-  bucket        = "csye-6225-s3-${random_id.s3_bucket_id}"
+  bucket        = "csye-6225-s3-${random_id.s3_bucket_id.hex}"
   force_destroy = true
+
+  tags = {
+    "Name" = var.s3_bucket_tag
+  }
 }
 
 resource "aws_s3_bucket_acl" "s3_bucket_acl" {

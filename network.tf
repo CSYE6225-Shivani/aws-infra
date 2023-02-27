@@ -166,8 +166,7 @@ resource "aws_security_group" "database_security_group" {
     from_port       = 5432
     protocol        = "tcp"
     to_port         = 5432
-    security_groups = [aws_security_group.application-sg]
-    cidr_blocks     = [aws_vpc.aws_vpc]
+    security_groups = [aws_security_group.application-sg.id]
   }
 
   tags = {

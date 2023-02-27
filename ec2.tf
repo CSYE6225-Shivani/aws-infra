@@ -1,7 +1,11 @@
 //EC2 instance
 resource "aws_key_pair" "ec2_access" {
-  key_name   = "ec2"
+  key_name   = "ec2-terraform"
   public_key = var.public_key
+
+  tags = {
+    "Name" = "EC2 AWS Key Pair"
+  }
 }
 
 data "aws_subnet_ids" "subnetIDs" {
@@ -11,6 +15,10 @@ data "aws_subnet_ids" "subnetIDs" {
   filter {
     name   = "tag:Name"
     values = ["*Public*"]
+  }
+
+  tags = {
+    "Name" = "Obtaining public Subnet IDs for EC2"
   }
 }
 
@@ -32,6 +40,29 @@ resource "aws_instance" "application-ec2" {
     volume_type           = "gp2"
     delete_on_termination = var.delete_on_termination
   }
+
+  user_data = <<EOF
+#!/bin/bash
+
+cd /etc/profile.d
+touch parameters.sh
+echo export HOST_NAME=${aws_db_instance.postgres_database.address} >> parameters.sh
+echo export DB_PORT=${var.db_port} >> parameters.sh
+echo export API_PORT=${var.api_port} >> parameters.sh
+echo export DB_NAME=${var.db_name} >> parameters.sh
+echo export DB_USERNAME=${var.db_master_username} >> parameters.sh
+echo export DB_PASSWORD=${var.db_master_password} >> parameters.sh
+
+cd /etc/systemd/system
+touch service.env
+echo HOST_NAME=${aws_db_instance.postgres_database.address} >> service.env
+echo DB_PORT=${var.db_port} >> service.env
+echo API_PORT=${var.api_port} >> service.env
+echo DB_NAME=${var.db_name} >> service.env
+echo DB_USERNAME=${var.db_master_username} >> service.env
+echo DB_PASSWORD=${var.db_master_password} >> service.env
+
+EOF
 
   tags = {
     Name = var.ec2_name

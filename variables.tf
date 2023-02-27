@@ -124,13 +124,21 @@ variable "db_security_group_name" {
   type        = string
   description = "DB security group name"
 }
+//----------------------------------------------------------------
+//Variables for S3
+variable "s3_bucket_tag" {
+  type        = string
+  description = "S3 bucket tag"
+}
 
+//----------------------------------------------------------------
 //Variables for RDS Parameter Group
 variable "db_family" {
   type        = string
   description = "Database family"
 }
 
+//----------------------------------------------------------------
 //Variables for DB Instance
 variable "db_instance" {
   type        = string
@@ -143,8 +151,13 @@ variable "db_engine" {
 }
 
 variable "db_engine_version" {
-  type        = number
+  type        = string
   description = "DB engine version"
+}
+
+variable "db_allocated_storage" {
+  type        = number
+  description = "Allocated storage"
 }
 
 variable "db_mutli_az" {
@@ -180,4 +193,26 @@ variable "db_name" {
 variable "db_AZ" {
   type        = string
   description = "DB Availability Zone"
+}
+
+variable "skip_final_snapshot" {
+  type        = bool
+  description = "skip_final_snapshot"
+}
+
+variable "db_port" {
+  type        = number
+  description = "Port number of POSTGRES"
+}
+
+//----------------------------------------------------------------
+//IAM role
+variable "ec2_iam_role" {
+  type        = string
+  description = "Name of EC2 IAM role"
+}
+
+variable "api_port" {
+  type        = number
+  description = "Application Port"
 }
