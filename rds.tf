@@ -9,8 +9,8 @@ data "aws_subnet_ids" "private_subnet_ids" {
 }
 
 resource "aws_db_subnet_group" "private_subnet_list" {
-  depends_on = [aws_vpc.aws_vpc,aws_subnet.private_subnets]
-  name = "private-subnet-list"
+  depends_on = [aws_vpc.aws_vpc, aws_subnet.private_subnets]
+  name       = "private-subnet-list"
   subnet_ids = [element(tolist(data.aws_subnet_ids.private_subnet_ids.ids), 0),
     element(tolist(data.aws_subnet_ids.private_subnet_ids.ids), 1),
   element(tolist(data.aws_subnet_ids.private_subnet_ids.ids), 2)]
@@ -32,7 +32,7 @@ resource "aws_db_parameter_group" "rds_parameter_group" {
 }
 
 resource "aws_db_instance" "postgres_database" {
-  depends_on = [aws_db_subnet_group.private_subnet_list, aws_security_group.database_security_group,aws_db_parameter_group.rds_parameter_group]
+  depends_on = [aws_db_subnet_group.private_subnet_list, aws_security_group.database_security_group, aws_db_parameter_group.rds_parameter_group]
 
   instance_class         = var.db_instance
   port                   = var.db_port
@@ -51,7 +51,7 @@ resource "aws_db_instance" "postgres_database" {
   skip_final_snapshot    = var.skip_final_snapshot
 
   tags = {
-    "Name" = "CSYE6225-RDS-Instance"
+    "Name" = var.aws_db_instance_name
   }
 }
 

@@ -4,7 +4,7 @@ resource "random_id" "s3_bucket_id" {
 
 resource "aws_s3_bucket" "s3_bucket" {
   bucket        = "csye-6225-s3-${random_id.s3_bucket_id.hex}"
-  force_destroy = true
+  force_destroy = var.s3_force_destroy
 
   tags = {
     "Name" = var.s3_bucket_tag
@@ -14,7 +14,7 @@ resource "aws_s3_bucket" "s3_bucket" {
 resource "aws_s3_bucket_acl" "s3_bucket_acl" {
   depends_on = [aws_s3_bucket.s3_bucket]
   bucket     = aws_s3_bucket.s3_bucket.id
-  acl        = "private"
+  acl        = var.s3_acl
 }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "s3_default_encryption" {
@@ -22,7 +22,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "s3_default_encryp
   bucket     = aws_s3_bucket.s3_bucket.id
   rule {
     apply_server_side_encryption_by_default {
-      sse_algorithm = "AES256"
+      sse_algorithm = var.s3_default_encryption
     }
   }
 }
@@ -36,8 +36,8 @@ resource "aws_s3_bucket_lifecycle_configuration" "s3_bucket_lifecycle_config" {
 
     transition {
       days          = 30
-      storage_class = "STANDARD_IA"
+      storage_class = var.s3_storage_class
     }
-    status = "Enabled"
+    status = var.s3_lifecycle_enable_status
   }
 }

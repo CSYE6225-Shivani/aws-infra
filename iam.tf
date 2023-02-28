@@ -2,7 +2,7 @@
 //EC2-CSYE6225 IAM role
 
 resource "aws_iam_role" "EC2-CSYE6225" {
-  name               = "EC2-CSYE6225"
+  name               = var.ec2_iam_role
   assume_role_policy = <<EOF
   {
     "Version": "2012-10-17",
@@ -27,9 +27,9 @@ EOF
 //------------------------------------------------
 //IAM Policy WebAppS3
 resource "aws_iam_policy" "WebAppS3" {
-  name        = "WebAppS3"
+  name        = var.aws_iam_policy_name
   description = "IAM policy for EC2-S3 resource "
-  policy      = <<-EOF
+  policy      = <<EOF
     {
     "Version": "2012-10-17",
     "Statement": [
@@ -51,7 +51,7 @@ resource "aws_iam_policy" "WebAppS3" {
     EOF
 
   tags = {
-    "Name" = "IAM Policy"
+    "Name" = var.aws_iam_policy_name
   }
 }
 
@@ -60,4 +60,11 @@ resource "aws_iam_policy" "WebAppS3" {
 resource "aws_iam_role_policy_attachment" "EC2-CSYE6225-S3" {
   policy_arn = aws_iam_policy.WebAppS3.arn
   role       = aws_iam_role.EC2-CSYE6225.name
+}
+
+//------------------------------------------------
+//EC2-CSYE6225  - Instance Profile for EC2
+resource "aws_iam_instance_profile" "ec2_profile" {
+  name = "ec2_instance_profile"
+  role = aws_iam_role.EC2-CSYE6225.name
 }
