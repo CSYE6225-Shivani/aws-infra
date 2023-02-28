@@ -25,7 +25,7 @@ output "subnet_ids" {
 }
 
 resource "aws_instance" "application-ec2" {
-  depends_on              = [aws_key_pair.ec2_access, aws_vpc.aws_vpc, aws_security_group.application-sg, aws_db_instance.postgres_database]
+  depends_on              = [aws_key_pair.ec2_access, aws_vpc.aws_vpc, aws_security_group.application-sg, aws_db_instance.postgres_database,aws_s3_bucket.s3_bucket]
   ami                     = var.custom_ami_id
   instance_type           = var.instance_type
   vpc_security_group_ids  = [aws_security_group.application-sg.id]
