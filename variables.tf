@@ -118,6 +118,21 @@ variable "disable_api_termination" {
   description = "Protect against accidental termination"
 }
 
+variable "ec2_key_name" {
+  type        = string
+  description = "ec2 key Name"
+}
+
+variable "aws_instance_vol_size" {
+  type        = number
+  description = "aws_instance_volume_size"
+}
+
+variable "aws_instance_vol_type" {
+  type        = string
+  description = "aws_instance_volume_type"
+}
+
 //----------------------------------------------------------------
 //Variables for Database Security Group
 variable "db_security_group_name" {
@@ -129,6 +144,31 @@ variable "db_security_group_name" {
 variable "s3_bucket_tag" {
   type        = string
   description = "S3 bucket tag"
+}
+
+variable "s3_force_destroy" {
+  type        = bool
+  description = "S3 force destroy flag"
+}
+
+variable "s3_acl" {
+  type        = string
+  description = "S3 ACL - set to private"
+}
+
+variable "s3_default_encryption" {
+  type        = string
+  description = "s3_default_encryption - set to AES256"
+}
+
+variable "s3_storage_class" {
+  type        = string
+  description = "Lifecycle s3 storage class"
+}
+
+variable "s3_lifecycle_enable_status" {
+  type        = string
+  description = "s3_lifecycle_enable_status"
 }
 
 //----------------------------------------------------------------
@@ -205,9 +245,21 @@ variable "db_port" {
   description = "Port number of POSTGRES"
 }
 
+variable "aws_db_instance_name" {
+  type        = string
+  description = "Name of aws_db_instance"
+}
+
 //----------------------------------------------------------------
-//IAM role
+//IAM
 variable "ec2_iam_role" {
   type        = string
   description = "Name of EC2 IAM role"
 }
+
+variable "aws_iam_policy_name" {
+  type        = string
+  description = "aws_iam_policy_name"
+}
+
+
