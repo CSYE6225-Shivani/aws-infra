@@ -29,7 +29,7 @@ EOF
 resource "aws_iam_policy" "WebAppS3" {
   name        = var.aws_iam_policy_name
   description = "IAM policy for EC2-S3 resource "
-  policy      = <<EOF
+  policy      = <<-EOF
     {
     "Version": "2012-10-17",
     "Statement": [
@@ -42,8 +42,8 @@ resource "aws_iam_policy" "WebAppS3" {
             ],
             "Effect": "Allow",
             "Resource": [
-                "arn:aws:s3:::${aws_s3_bucket.s3_bucket.bucket}",
-                "arn:aws:s3:::${aws_s3_bucket.s3_bucket.bucket}/*"
+                "arn:aws:s3:::${aws_s3_bucket.s3_bucket.id}",
+                "arn:aws:s3:::${aws_s3_bucket.s3_bucket.id}/*"
             ]
         }
     ]
