@@ -42,7 +42,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "s3_bucket_lifecycle_config" {
   }
 }
 
-resource "aws_s3_bucket_public_access_block" "" {
+resource "aws_s3_bucket_public_access_block" "s3_bucket_public_access" {
   bucket = aws_s3_bucket.s3_bucket.id
 
   block_public_acls       = true
