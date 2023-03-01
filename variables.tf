@@ -171,6 +171,26 @@ variable "s3_lifecycle_enable_status" {
   description = "s3_lifecycle_enable_status"
 }
 
+variable "block_public_acls" {
+  type        = bool
+  description = "block_public_acls"
+}
+
+variable "block_public_policy" {
+  type        = bool
+  description = "block_public_policy"
+}
+
+variable "ignore_public_acls" {
+  type        = bool
+  description = "ignore_public_acls"
+}
+
+variable "restrict_public_buckets" {
+  type        = bool
+  description = "restrict_public_buckets"
+}
+
 //----------------------------------------------------------------
 //Variables for RDS Parameter Group
 variable "db_family" {
