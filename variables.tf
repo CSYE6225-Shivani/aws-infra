@@ -282,4 +282,18 @@ variable "aws_iam_policy_name" {
   description = "aws_iam_policy_name"
 }
 
+variable "domain_name" {
+  type        = string
+  description = "aws_domain_name"
+}
+
+variable "route53_private_zone" {
+  type        = bool
+  description = "Route53 private hosted zone"
+}
+
+variable "route53_record_type" {
+  type        = string
+  description = "Record Type"
+}
 
