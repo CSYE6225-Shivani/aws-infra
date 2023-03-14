@@ -43,17 +43,6 @@ resource "aws_instance" "application-ec2" {
   user_data = <<EOF
 #!/bin/bash
 
-cd /etc/profile.d
-touch parameters.sh
-echo export HOST_NAME=${aws_db_instance.postgres_database.address} >> parameters.sh
-echo export DB_PORT=${var.db_port} >> parameters.sh
-echo export API_PORT=${var.application_port} >> parameters.sh
-echo export DB_NAME=${var.db_name} >> parameters.sh
-echo export DB_USERNAME=${var.db_master_username} >> parameters.sh
-echo export DB_PASSWORD=${var.db_master_password} >> parameters.sh
-echo export AWS_S3_BUCKET_NAME=${aws_s3_bucket.s3_bucket.bucket} >> parameters.sh
-echo export AWS_BUCKET_REGION=${var.region} >> parameters.sh
-
 cd /etc/systemd/system/
 echo HOST_NAME=${aws_db_instance.postgres_database.address} >> service.env
 echo DB_PORT=${var.db_port} >> service.env
