@@ -282,6 +282,9 @@ variable "aws_iam_policy_name" {
   description = "aws_iam_policy_name"
 }
 
+//----------------------------------------------------------------
+//Route53
+
 variable "domain_name" {
   type        = string
   description = "aws_domain_name"
