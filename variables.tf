@@ -297,3 +297,8 @@ variable "route53_record_type" {
   description = "Record Type"
 }
 
+variable "ttl_value" {
+  type        = number
+  description = "TTL Value"
+}
+
