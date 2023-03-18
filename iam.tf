@@ -62,6 +62,11 @@ resource "aws_iam_role_policy_attachment" "EC2-CSYE6225-S3" {
   role       = aws_iam_role.EC2-CSYE6225.name
 }
 
+//Updating EC2-CSYE6225 IAM role to use CloudWatch agent
+resource "aws_iam_role_policy_attachment" "EC2-CSYE6225-CloudWatch" {
+  policy_arn = "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"
+  role       = aws_iam_role.EC2-CSYE6225.name
+}
 //------------------------------------------------
 //EC2-CSYE6225  - Instance Profile for EC2
 resource "aws_iam_instance_profile" "ec2_profile" {

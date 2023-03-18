@@ -57,6 +57,8 @@ systemctl daemon-reload
 systemctl enable userWebApp.service
 systemctl start userWebApp.service
 
+sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/usr/bin/amazon-cloudwatch-agent.json
+
 EOF
 
   tags = {
