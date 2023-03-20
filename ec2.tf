@@ -53,11 +53,12 @@ echo DB_PASSWORD=${var.db_master_password} >> service.env
 echo AWS_S3_BUCKET_NAME=${aws_s3_bucket.s3_bucket.bucket} >> service.env
 echo AWS_BUCKET_REGION=${var.region} >> service.env
 
+sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/usr/bin/amazon-cloudwatch-agent.json
+
+systemctl stop userWebApp.service
 systemctl daemon-reload
 systemctl enable userWebApp.service
 systemctl start userWebApp.service
-
-sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -s -c file:/usr/bin/amazon-cloudwatch-agent.json
 
 EOF
 
