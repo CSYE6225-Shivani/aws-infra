@@ -83,3 +83,10 @@ Delete Image for a Product
 4. http://{{host}}:8080/v1/product/1/image/
 
 
+---------
+## **_Assignment 07:_**
+Attached CloudWatchAgentServerPolicy to EC2-CSYE6225 role for log group & log stream to get created.
+
+
+
+
