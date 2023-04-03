@@ -104,7 +104,7 @@ resource "aws_route_table_association" "private_subnet_private_route_table" {
 //---------------------------------------------------------------
 //Application Security Group
 resource "aws_security_group" "application-sg" {
-  depends_on  = [aws_vpc.aws_vpc]
+  depends_on  = [aws_vpc.aws_vpc, aws_security_group.load_balancer_security_group]
   name        = "application"
   description = "Security group for EC2 instances"
   vpc_id      = aws_vpc.aws_vpc.id
@@ -114,31 +114,42 @@ resource "aws_security_group" "application-sg" {
     from_port   = 22
     protocol    = "tcp"
     to_port     = 22
+    //Commenting this part for Assignment 08 - Start
     cidr_blocks = ["0.0.0.0/0"]
+    //Commenting this part for Assignment 08 - End
+    #    security_groups = [aws_security_group.load_balancer_security_group.id]
   }
 
-  ingress {
-    description = "HTTP"
-    from_port   = 80
-    protocol    = "tcp"
-    to_port     = 80
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+  #  ingress {
+  #    description = "HTTP"
+  #    from_port   = 80
+  #    protocol    = "tcp"
+  #    to_port     = 80
+  #    //Commenting this part for Assignment 08 - Start
+  #    #      cidr_blocks = ["0.0.0.0/0"]
+  #    //Commenting this part for Assignment 08 - End
+  #    security_groups = [aws_security_group.load_balancer_security_group.id]
+  #  }
 
-  ingress {
-    description = "HTTPS"
-    from_port   = 443
-    protocol    = "tcp"
-    to_port     = 443
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+  //Commenting this part for Assignment 08 - Start
+  #  ingress {
+  #    description = "HTTPS"
+  #    from_port   = 443
+  #    protocol    = "tcp"
+  #    to_port     = 443
+  #    cidr_blocks = ["0.0.0.0/0"]
+  #  }
+  //Commenting this part for Assignment 08 - End
 
   ingress {
     description = "application_port"
     from_port   = var.application_port
     protocol    = "tcp"
     to_port     = var.application_port
-    cidr_blocks = ["0.0.0.0/0"]
+    //Commenting this part for Assignment 08 - Start
+    #    cidr_blocks = ["0.0.0.0/0"]
+    //Commenting this part for Assignment 08 - End
+    security_groups = [aws_security_group.load_balancer_security_group.id]
   }
 
   egress {
@@ -171,6 +182,43 @@ resource "aws_security_group" "database_security_group" {
 
   tags = {
     Name = var.db_security_group_name
+  }
+}
+
+//---------------------------------------------------------------
+//Load Balancer Security Group
+resource "aws_security_group" "load_balancer_security_group" {
+  depends_on  = [aws_vpc.aws_vpc]
+  name        = "load_balancer"
+  description = "Security Group for load balancer"
+  vpc_id      = aws_vpc.aws_vpc.id
+
+  ingress {
+    description = "HTTP"
+    from_port   = 80
+    protocol    = "tcp"
+    to_port     = 80
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    description = "HTTPS"
+    from_port   = 443
+    protocol    = "tcp"
+    to_port     = 443
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    description = "Application Port"
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = var.load_balancer_security_group
   }
 }
 
