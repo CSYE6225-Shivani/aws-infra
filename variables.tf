@@ -305,3 +305,272 @@ variable "ttl_value" {
   description = "TTL Value"
 }
 
+//----------------------------------------------------------------
+//Load Balancer
+
+variable "lb_name" {
+  type        = string
+  description = "Load Balancer Name"
+}
+
+variable "load_balancer_security_group" {
+  type        = string
+  description = "Load Balancer Security Group Name"
+}
+
+variable "load_balancer_internal" {
+  type        = bool
+  description = "load_balancer_internal"
+}
+
+variable "load_balancer_type" {
+  type        = string
+  description = "Load Balancer Type"
+}
+
+variable "lb_ip_address_type" {
+  type        = string
+  description = "IP address Type"
+}
+
+//----------------------------------------------------------------
+//Listener
+variable "lb_listener_port" {
+  type        = string
+  description = "lb_listener_port"
+}
+
+variable "lb_listener_protocol" {
+  type        = string
+  description = "lb_listener_protocol"
+}
+
+variable "lb_listener_default_type" {
+  type        = string
+  description = "lb_listener_default_type"
+}
+
+//----------------------------------------------------------------
+//Launch Template
+variable "launch_template_name" {
+  type        = string
+  description = "Launch Template Name"
+}
+
+variable "launch_template_description" {
+  type        = string
+  description = "Launch Template Description"
+}
+
+//----------------------------------------------------------------
+//Autoscaling group
+
+variable "asg_min" {
+  type        = number
+  description = "Min auto scaling group"
+}
+
+variable "asg_max" {
+  type        = number
+  description = "Max auto scaling group"
+}
+
+variable "asg_desired_capacity" {
+  type        = number
+  description = "ASG desired Capacity"
+}
+
+variable "asg_cooldown" {
+  type        = string
+  description = "ASG cooldown"
+}
+
+variable "device_name" {
+  type        = string
+  description = "Device name"
+}
+
+variable "associate_public_ip" {
+  type        = bool
+  description = "Associate public IP address"
+}
+
+variable "asg_name" {
+  type        = string
+  description = "Name of Autoscaling group"
+}
+
+variable "asg_propagate_at_launch" {
+  type        = bool
+  description = "propagate_at_launch"
+}
+
+variable "asg_tag_key" {
+  type        = string
+  description = "Tag key name"
+}
+
+variable "asg_tag_value" {
+  type        = string
+  description = "Tag key Value"
+}
+
+//----------------------------------------------------------------
+//Target group variables
+
+variable "lb_target_group_name" {
+  type        = string
+  description = "Name of load balancer target group"
+}
+
+variable "target_group_port" {
+  type        = number
+  description = "Target Group Port"
+}
+
+variable "target_type" {
+  type        = string
+  description = "target_type"
+}
+
+variable "target_group_protocol" {
+  type        = string
+  description = "Target Group Protocol"
+}
+
+variable "target_group_path" {
+  type        = string
+  description = "Target group path"
+}
+
+variable "target_group_matcher" {
+  type        = number
+  description = "Target Group Matcher"
+}
+
+variable "target_group_healthy" {
+  type        = number
+  description = "Target Group Healthy Threshold"
+}
+
+variable "target_group_unhealthy" {
+  type        = number
+  description = "Target Group unhealthy Threshold"
+}
+
+variable "target_group_interval" {
+  type        = number
+  description = "Target Group Interval"
+}
+
+variable "target_group_timeout" {
+  type        = number
+  description = "Target Group Timeout"
+}
+
+//----------------------------------------------------------------
+//Scale Out Policy
+variable "autoscaling_policy_name_scale_out" {
+  type        = string
+  description = "Autoscaling Scale Out Policy"
+}
+
+variable "scaling_adjustment_scale_out" {
+  type        = number
+  description = "Scaling_adjustment"
+}
+
+//----------------------------------------------------------------
+//Scale In Policy
+variable "autoscaling_policy_name_scale_in" {
+  type        = string
+  description = "Autoscaling Scale Out Policy"
+}
+
+variable "scaling_adjustment_scale_in" {
+  type        = number
+  description = "Scaling_adjustment"
+}
+
+//Common for scale-in & scale-out
+variable "auto_scaling_policy_cooldown" {
+  type        = number
+  description = "Auto scaling policy scale out cooldown"
+}
+
+variable "adjustment_type" {
+  type        = string
+  description = "Adjustment Type"
+}
+
+//CloudWatch Metric Alarm Scale Out variables
+variable "metric_alarm_name_so" {
+  type        = string
+  description = "Scale out metric alarm name"
+}
+
+variable "metric_alarm_threshold_so" {
+  type        = string
+  description = "Metric_alarm_threshold"
+}
+
+variable "metric_alarm_description_so" {
+  type        = string
+  description = "Metric Alarm Description"
+}
+
+variable "metric_alarm_comparision_operator_so" {
+  type        = string
+  description = "Metric Alarm Comparision Alarm"
+}
+
+
+//CloudWatch Metric Alarm Scale In variables
+variable "metric_alarm_name_si" {
+  type        = string
+  description = "Scale out metric alarm name"
+}
+
+variable "metric_alarm_threshold_si" {
+  type        = string
+  description = "Metric_alarm_threshold"
+}
+
+variable "metric_alarm_description_si" {
+  type        = string
+  description = "Metric Alarm Description"
+}
+
+variable "metric_alarm_comparision_operator_si" {
+  type        = string
+  description = "Metric Alarm Comparision Alarm"
+}
+
+//Common for metric Alarms
+variable "metric_alarm_evaluation_periods" {
+  type        = string
+  description = "Metric Alarm evaluation periods"
+}
+
+variable "metric_alarm_namespace" {
+  type        = string
+  description = "Metric Alarm Namespace"
+}
+
+variable "metric_alarm_period" {
+  type        = string
+  description = "Metric_alarm_period"
+}
+
+variable "metric_alarm_statistic" {
+  type        = string
+  description = "Metric_alarm_statistic"
+}
+
+variable "metric_name" {
+  type        = string
+  description = "Metric name"
+}
+
+
+
