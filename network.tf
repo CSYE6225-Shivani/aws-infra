@@ -115,9 +115,9 @@ resource "aws_security_group" "application-sg" {
     protocol    = "tcp"
     to_port     = 22
     //Commenting this part for Assignment 08 - Start
-    cidr_blocks = ["0.0.0.0/0"]
+#    cidr_blocks = ["0.0.0.0/0"]
     //Commenting this part for Assignment 08 - End
-    #    security_groups = [aws_security_group.load_balancer_security_group.id]
+        security_groups = [aws_security_group.load_balancer_security_group.id]
   }
 
   #  ingress {

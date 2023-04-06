@@ -87,6 +87,10 @@ Delete Image for a Product
 ## **_Assignment 07:_**
 Attached CloudWatchAgentServerPolicy to EC2-CSYE6225 role for log group & log stream to get created.
 
-
-
+## **_Assignment 08:_**
+1. Created a security group for load balancer
+2. Commented out EC2 resource creation
+3. Created AutoScaling Group
+4. Created Load Balancer
+5. Created Alarms
 
