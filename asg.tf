@@ -49,9 +49,6 @@ resource "aws_launch_template" "lt" {
     name = aws_iam_instance_profile.ec2_profile.name
   }
 
-  lifecycle {
-    create_before_destroy = true
-  }
 }
 
 resource "aws_autoscaling_group" "asg_launch_config" {
