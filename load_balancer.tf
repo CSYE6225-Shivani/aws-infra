@@ -41,6 +41,8 @@ resource "aws_lb_listener" "load_balancer_listener" {
   load_balancer_arn = aws_lb.lb.arn
   port              = var.lb_listener_port
   protocol          = var.lb_listener_protocol
+  #  certificate_arn   = var.certificate_arn
+
   default_action {
     type             = var.lb_listener_default_type
     target_group_arn = aws_lb_target_group.target_group_load_balancer.arn
