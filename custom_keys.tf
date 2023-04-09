@@ -55,7 +55,7 @@ resource "aws_kms_key" "ec2_key" {
 }
 
 resource "aws_kms_alias" "ec2_kms_key" {
-  name = "ec2-kms-key-alias"
+  name          = "ec2-kms-key-alias"
   target_key_id = aws_kms_key.ec2_key.key_id
 }
 
@@ -117,5 +117,5 @@ resource "aws_kms_key" "rds_kms_key" {
 
 resource "aws_kms_alias" "rds_kms_key" {
   target_key_id = aws_kms_key.rds_kms_key.key_id
-  name = "rds-kms-key-alias"
+  name          = "rds-kms-key-alias"
 }
