@@ -572,5 +572,10 @@ variable "metric_name" {
   description = "Metric name"
 }
 
+//----------------------------------------------------------------
+//SSL
 
-
+variable "certificate_arn" {
+  type        = string
+  description = "Certificate ARN"
+}

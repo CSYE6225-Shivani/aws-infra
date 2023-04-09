@@ -32,8 +32,9 @@ resource "aws_db_parameter_group" "rds_parameter_group" {
 }
 
 resource "aws_db_instance" "postgres_database" {
-  depends_on = [aws_db_subnet_group.private_subnet_list, aws_security_group.database_security_group, aws_db_parameter_group.rds_parameter_group]
-
+  depends_on             = [aws_db_subnet_group.private_subnet_list, aws_security_group.database_security_group, aws_db_parameter_group.rds_parameter_group]
+  storage_encrypted      = true
+  kms_key_id             = aws_kms_key.rds_kms_key.arn
   instance_class         = var.db_instance
   port                   = var.db_port
   engine                 = var.db_engine
