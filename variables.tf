@@ -579,3 +579,22 @@ variable "certificate_arn" {
   type        = string
   description = "Certificate ARN"
 }
+
+//----------------------------------------------------------------
+//EC2 encrypted
+variable "ec2_encrypted_flag" {
+  type        = bool
+  description = "Flag for EC2 encrypted"
+}
+
+variable "account_id" {
+  type        = number
+  description = "Account number"
+}
+
+//----------------------------------------------------------------
+//Storage encrypted
+variable "rds_encrypted_flag" {
+  type        = bool
+  description = "Flag for RDS encrypted"
+}

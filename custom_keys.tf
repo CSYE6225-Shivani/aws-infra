@@ -14,7 +14,7 @@ resource "aws_kms_key" "ec2_key" {
                 "Effect": "Allow",
                 "Principal": {
                     "AWS": [
-                        "arn:aws:iam::818531620527:root"
+                        "arn:aws:iam::${var.account_id}:root"
                     ]
                 },
                 "Action": "kms:*",
@@ -24,7 +24,7 @@ resource "aws_kms_key" "ec2_key" {
                 "Sid": "Allow service-linked role use of the customer managed key",
                 "Effect": "Allow",
                 "Principal": {
-                    "AWS": "arn:aws:iam::818531620527:role/aws-service-role/autoscaling.amazonaws.com/AWSServiceRoleForAutoScaling"
+                    "AWS": "arn:aws:iam::${var.account_id}:role/aws-service-role/autoscaling.amazonaws.com/AWSServiceRoleForAutoScaling"
                 },
                 "Action": [
                     "kms:Encrypt",
@@ -39,7 +39,7 @@ resource "aws_kms_key" "ec2_key" {
                 "Sid": "Allow attachment of persistent resources",
                 "Effect": "Allow",
                 "Principal": {
-                    "AWS": "arn:aws:iam::818531620527:role/aws-service-role/autoscaling.amazonaws.com/AWSServiceRoleForAutoScaling"
+                    "AWS": "arn:aws:iam::${var.account_id}:role/aws-service-role/autoscaling.amazonaws.com/AWSServiceRoleForAutoScaling"
                 },
                 "Action": "kms:CreateGrant",
                 "Resource": "*",
@@ -54,10 +54,10 @@ resource "aws_kms_key" "ec2_key" {
     EOF
 }
 
-resource "aws_kms_alias" "ec2_kms_key" {
-  name          = "ec2-kms-key-alias"
-  target_key_id = aws_kms_key.ec2_key.key_id
-}
+#resource "aws_kms_alias" "ec2_kms_key" {
+#  name          = "'alias/ec2"
+#  target_key_id = aws_kms_key.ec2_key.key_id
+#}
 
 resource "aws_kms_key" "rds_kms_key" {
   description              = "Custom key for RDS"
@@ -75,7 +75,7 @@ resource "aws_kms_key" "rds_kms_key" {
                 "Effect": "Allow",
                 "Principal": {
                     "AWS": [
-                        "arn:aws:iam::818531620527:root"
+                        "arn:aws:iam::${var.account_id}:root"
                     ]
                 },
                 "Action": "kms:*",
@@ -85,7 +85,7 @@ resource "aws_kms_key" "rds_kms_key" {
                 "Sid": "Allow service-linked role use of the customer managed key",
                 "Effect": "Allow",
                 "Principal": {
-                    "AWS": "arn:aws:iam::818531620527:role/aws-service-role/rds.amazonaws.com/AWSServiceRoleForRDS"
+                    "AWS": "arn:aws:iam::${var.account_id}:role/aws-service-role/rds.amazonaws.com/AWSServiceRoleForRDS"
                 },
                 "Action": [
                     "kms:Encrypt",
@@ -100,7 +100,7 @@ resource "aws_kms_key" "rds_kms_key" {
                 "Sid": "Allow attachment of persistent resources",
                 "Effect": "Allow",
                 "Principal": {
-                    "AWS": "arn:aws:iam::818531620527:role/aws-service-role/rds.amazonaws.com/AWSServiceRoleForRDS"
+                    "AWS": "arn:aws:iam::${var.account_id}:role/aws-service-role/rds.amazonaws.com/AWSServiceRoleForRDS"
                 },
                 "Action": "kms:CreateGrant",
                 "Resource": "*",
@@ -115,7 +115,7 @@ resource "aws_kms_key" "rds_kms_key" {
     EOF
 }
 
-resource "aws_kms_alias" "rds_kms_key" {
-  target_key_id = aws_kms_key.rds_kms_key.key_id
-  name          = "rds-kms-key-alias"
-}
+#resource "aws_kms_alias" "rds_kms_key" {
+#  target_key_id = aws_kms_key.rds_kms_key.key_id
+#  name          = "'alias/rds"
+#}
