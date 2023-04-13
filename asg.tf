@@ -62,8 +62,9 @@ resource "aws_autoscaling_group" "asg_launch_config" {
   desired_capacity = var.asg_desired_capacity
 
   launch_template {
-    id      = aws_launch_template.lt.id
-    version = aws_launch_template.lt.latest_version
+    id = aws_launch_template.lt.id
+    #    version = aws_launch_template.lt.latest_version
+    version = "$Latest"
   }
 
   vpc_zone_identifier = [element(tolist(data.aws_subnet_ids.subnetIDs.ids), 0), element(tolist(data.aws_subnet_ids.subnetIDs.ids), 1),
