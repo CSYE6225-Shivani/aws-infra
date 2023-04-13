@@ -109,16 +109,16 @@ resource "aws_security_group" "application-sg" {
   description = "Security group for EC2 instances"
   vpc_id      = aws_vpc.aws_vpc.id
 
-  ingress {
-    description = "SSH"
-    from_port   = 22
-    protocol    = "tcp"
-    to_port     = 22
-    //Commenting this part for Assignment 08 - Start
-    #    cidr_blocks = ["0.0.0.0/0"]
-    //Commenting this part for Assignment 08 - End
-    security_groups = [aws_security_group.load_balancer_security_group.id]
-  }
+#   ingress {
+#     description = "SSH"
+#     from_port   = 22
+#     protocol    = "tcp"
+#     to_port     = 22
+#     //Commenting this part for Assignment 08 - Start
+#     #    cidr_blocks = ["0.0.0.0/0"]
+#     //Commenting this part for Assignment 08 - End
+#     security_groups = [aws_security_group.load_balancer_security_group.id]
+#   }
 
   #  ingress {
   #    description = "HTTP"
