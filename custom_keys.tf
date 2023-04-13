@@ -54,10 +54,10 @@ resource "aws_kms_key" "ec2_key" {
     EOF
 }
 
-resource "aws_kms_alias" "ec2_kms_key" {
-  name          = "alias/ec2"
-  target_key_id = aws_kms_key.ec2_key.key_id
-}
+#resource "aws_kms_alias" "ec2_kms_key" {
+#  name          = "alias/ec2"
+#  target_key_id = aws_kms_key.ec2_key.key_id
+#}
 
 resource "aws_kms_key" "rds_kms_key" {
   description              = "Custom key for RDS"
@@ -115,7 +115,7 @@ resource "aws_kms_key" "rds_kms_key" {
     EOF
 }
 
-resource "aws_kms_alias" "rds_kms_key" {
-  target_key_id = aws_kms_key.rds_kms_key.key_id
-  name          = "alias/rds"
-}
+#resource "aws_kms_alias" "rds_kms_key" {
+#  target_key_id = aws_kms_key.rds_kms_key.key_id
+#  name          = "alias/rds"
+#}
