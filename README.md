@@ -1,3 +1,74 @@
+# Infrastructure as Code with Terraform
+This guide provides an overview of how to create network infrastructure using Terraform. We'll create a Virtual Private Cloud (VPC) with associated public and private subnets, configure route tables, and attach an Internet Gateway for public internet access.
+
+## Prerequisites
+Before getting started, make sure you have the following:
+
+## Install Terraform:
+https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli
+
+## AWS Resources
+---------------------------------------------------------
+## Virtual Private Cloud (VPC)
+Created a new VPC named "myVPC" with specified CIDR block.
+
+## Internet Gateway
+Created a new Internet Gateway named "myInternetGateway" and attached it to the VPC.
+
+## Availability Zones
+Queried and obtained the first three availability zones.
+
+## Subnets
+Created public and private subnets in each availability zone.
+Associated route tables with subnets.
+
+## Route Tables
+Created public and private route tables.
+Associated subnets with route tables.
+
+## Security Groups
+Created security groups for load balancer, EC2 instances, and RDS instance.
+
+## RDS (Relational Database Service)
+Created a MySQL RDS instance with specified configurations.
+
+## IAM (Identity and Access Management)
+Created an IAM role with policies for EC2 instances.
+Attached policies for CloudWatch and S3 to the role.
+
+## Load Balancer
+Created an Application Load Balancer with specified configurations.
+Configured listeners and target groups.
+
+## Auto Scaling
+Created an Auto Scaling Group with scaling policies and CloudWatch alarms.
+
+## AWS Lambda
+Created an IAM role and attached policies for Lambda function.
+Defined and created an AWS Lambda function with dependencies on S3 bucket.
+
+## SNS (Simple Notification Service)
+Created an SNS topic and subscription for Lambda function.
+
+## AWS CloudWatch Alarms
+Created CloudWatch alarms for scaling based on CPU utilization.
+
+## Route53
+Created a Route53 record for the load balancer.
+
+## AWS DynamoDB
+Created a DynamoDB table with specified attributes and global secondary indexes.
+Configured an IAM policy for DynamoDB access and attached it to the Lambda execution role.
+
+## AWS S3
+Created an S3 bucket with private ACL.
+
+
+
+--------------------------------------------------------------------
+
+
+
 # aws-infra
 ---------------------------
 # _Assignment 3_
